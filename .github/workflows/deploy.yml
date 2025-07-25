@@ -21,11 +21,15 @@ jobs:
       run: npm ci
       
     - name: Build
-      run: npm run build -- --configuration production
+      run: npm run build -- --configuration production --base-href "/kudi-portfolio/"
       
+    - name: Create 404.html for Angular routing
+      run: |
+        cp ./dist/kudi-portfolio/browser/index.html ./dist/kudi-portfolio/browser/404.html
+        
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
       if: github.ref == 'refs/heads/main'
       with:
-        github_token: ${{ secrets.GH_TOKEN }}
+        github_token: ${{ secrets.GH_TOKEN  }}
         publish_dir: ./dist/kudi-portfolio/browser 
