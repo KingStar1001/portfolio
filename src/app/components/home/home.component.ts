@@ -35,6 +35,14 @@ export class HomeComponent implements OnInit, OnDestroy {
   constructor(private contactService: ContactService, private cdr: ChangeDetectorRef) {}
   projects: Project[] = [
     {
+      title: 'IPF Digital',
+      description: 'Developed a cloud-based system for nonprofit and member-driven organizations to streamline donor management, automate billing and communications, and coordinate events and campaigns. Enhanced data centralization and boosted supporter engagement.',
+      technologies: ['Full Stack', 'Web Application', 'API Integration', 'Fintech', 'Cloud'],
+      liveUrl: 'https://www.ipfdigital.com/',
+      githubUrl: '#',
+      image: 'assets/images/project-ipf-digital.png'
+    },
+    {
       title: 'iLoy Solution',
       description: 'Worked on a real-time customer loyalty and engagement system for large enterprises. Developed features for profiling, personalized rewards, and automated campaigns. Ensured seamless multi-channel integration and compliance with data privacy standards.',
       technologies: ['Cloud Platform', 'API Development', 'Multilingual UI', 'Real-time Systems'],
@@ -139,32 +147,17 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   scrollToSection(sectionId: string) {
     const element = document.getElementById(sectionId);
+    
     if (element) {
-      const navbarHeight = 80; // Height of fixed navbar
+      // Calculate position accounting for navbar
+      const navbarHeight = 80;
       const elementPosition = element.offsetTop - navbarHeight;
       
-      // Primary method: scrollIntoView (most reliable)
-      element.scrollIntoView({ 
-        behavior: 'smooth',
-        block: 'start'
+      // Use smooth scroll
+      window.scrollTo({
+        top: elementPosition,
+        behavior: 'smooth'
       });
-      
-      // Adjust for navbar after scroll
-      setTimeout(() => {
-        window.scrollBy(0, -navbarHeight);
-      }, 100);
-      
-      // Fallback method: window.scrollTo
-      setTimeout(() => {
-        const currentPosition = window.pageYOffset;
-        if (Math.abs(currentPosition - elementPosition) > 50) {
-          window.scrollTo({
-            top: elementPosition,
-            behavior: 'smooth'
-          });
-        }
-      }, 200);
-      
     }
   }
 
